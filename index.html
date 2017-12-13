@@ -1,123 +1,23 @@
-<!DOCTYPE html><html><head><title>Lets talk about ... GraphQL by Tamino</title><meta charset="utf-8"><script src="assets/vendor/slides.js"></script><link href="styles.css" rel="stylesheet" type="text/css"></head><body><section class="slides layout-regular template-default"><article><h2>Lets Talk about...</h2><h1>&nbsp;</h1></article><article><h2>Lets Talk about...</h2><h1>GraphQL</h1></article><article><h1>What is GraphQL?</h1></article><article><h2>What is GraphQL?</h2><ul class="build"><li>Invented by Facebook Mobile Department (2012)</li><li>Open Sourced 2015</li><li>Query Language</li><li>Made for APIs</li></ul></article><article><h1>API?</h1></article><article data-src="assets/memes/philosoraptor.jpg" class="image"><h2>Why don't use</h2><h1>REST</h1></article><article><h2>Whats wrong with REST?</h2><ul class="build"><li>Multiple calls</li><li>Define nesting</li><li>Define selected fields</li><li>Multiple endpoints</li><li>GET requests with limited query size</li></ul></article><article><h1>All in one Query?</h1></article><article data-src="assets/memes/philosoraptor.jpg" class="image"><h2>Why don't use</h2><h1>SQL</h1></article><article><h2>Whats wrong with SQL?</h2><ul class="build"><li>Database dependent</li><li>Only subset of features</li><li>Confusing notation</li><li>Not made for API</li></ul></article><article data-src="assets/memes/fry.jpg" class="image"><h1>Why GraphQL?</h1></article><article><h2>Why GraphQL?</h2><ul class="build"><li>De-Coupled from storage</li><li>Whole request in one query</li><li>POST to a single endpoint</li><li>Validated and Structured</li><li>Easy to optimize</li></ul></article><article data-src="assets/memes/crash.jpg" class="image cover"><h1>&nbsp;</h1><h1>Crash Course</h1></article><article><h1>Server</h1></article><article><h1>Types</h1></article><article><pre class="linenums">type Employment {
-  firstName: String!
-  lastName: String!
-  worksAt: [Shift]!
-}</pre><ul><li>&nbsp;</li><li>&nbsp;</li><li>&nbsp;</li></ul></article><article><pre class="linenums h0">type Employment {
-  firstName: String!
-  lastName: String!
-  worksAt: [Shift]!
-}</pre><ul><li><b>Employment</b></li><li><em>GraphQL Object Type</em>, meaning it's a type with some fields.</li><li>Most of the types in your schema will be object types.</li></ul></article><article><pre class="linenums h1 h2 h3">type Employment {
-  firstName: String!
-  lastName: String!
-  worksAt: [Shift]!
-}</pre><ul><li><b>firstName, lastName, worksAt</b></li><li><em>Fields</em> on <i>Employment</i> Type. That are the only</li><li>fields which can appear on a Employment type.</li></ul></article><article><pre class="linenums h1">type Employment {
-  firstName: String!
-  lastName: String!
-  worksAt: [Shift]!
-}</pre><ul><li><b>String</b></li><li>Build in <em>Scalar Type</em> - resolve to a single scalar</li><li>without any sub selections.</li></ul></article><article><pre class="linenums h1">type Employment {
-  firstName: String!
-  lastName: String!
-  worksAt: [Shift]!
-}</pre><ul><li><b>String!</b></li><li><em>Non-nullable</em> field.</li><li>&nbsp;</li></ul></article><article><pre class="linenums h3">type Employment {
-  firstName: String!
-  lastName: String!
-  worksAt: [Shift]!
-}</pre><ul><li><b>[Shift]!</b></li><li><em>Array</em> of shifts. Since its also <i>non-nullable</i>, you</li><li>can always expect an array (with zero or more Shifts).</li></ul></article><article><h1>Scalars</h1></article><article><h2>Build in Scalars</h2><ul class="build"><li><em>Int</em>: Signed 32-bit Integer.</li><li><em>Float</em>: Signed double-precision floating-point value.</li><li><em>String</em>: A UTF-8 character sequence.</li><li><em>Boolean</em>: <i>true</i> or <i>false</i></li><li><em>ID</em>: Unique Identifier serialized same way as String</li></ul></article><article><h2>Custom Scalars</h2><ul class="build"><li><pre>scalar Date</pre></li></ul></article><article><h2>Enums</h2><ul class="build"><li><pre>enum Style {
-  NONE
-  BOLD
-  ITALIC
-  UNDERLINE
-}</pre></li></ul></article><article><h2>Interface</h2><ul class="build"><li><pre>interface Person {
-  firstName: String!
-  lastName: String!
-}</pre></li></ul></article><article><h2>Using Interface</h2><ul class="build"><li><pre>type Employment implements Person {
-  firstName: String!
-  lastName: String!
-  worksAt: [Shift]!
-}</pre></li></ul></article><article><h2>Union</h2><ul class="build"><li><pre>union Conflict =
-  Shift | Absence | HourAccount</pre></li></ul></article><article><h2>Arguments</h2><ul class="build"><li><pre class="linenums h3">type Employment {
-  firstName: String!
-  lastName: String!
-  worksAt: [Shift]!
-}</pre></li></ul></article><article><h2>Arguments</h2><ul class="build"><li><pre class="linenums h4 h5">type Employment {
-  firstName: String!
-  lastName: String!
-  worksAt(
-    startsAt: Date,
-    endsAt: Date
-  ): [Shift]!
-}</pre></li></ul></article><article><h1>Schema</h1></article><article data-src="assets/images/gql-model.svg" class="image"></article><article><pre>schema {
-  query: Query
-  mutation: Mutation
-}</pre></article><article><pre>... scalars ...
-... interfaces ...
-... unions ...
-... types ...
-&nbsp;
-schema {
-  query: Query
-  mutation: Mutation
-}</pre></article><article><h2>Query</h2><ul class="build"><li><pre>type Query {
-  employment(id: ID): Employment
-}</pre></li></ul></article><article><h2>Query</h2><ul><li><pre>type Query {
-  employment(id: ID): Employment
-  employments(
-    id: ID,
-    firstName: string
-  ): [Employment]!
-}</pre></li></ul></article><article><h2>Query</h2><ul><li><pre>type Query {
-  employment(id: ID): Employment
-  employments(
-    ids: [ID],
-    firstName: string
-  ): [Employment]!
-  billingTypes: [BillingType]!
-}</pre></li></ul></article><article><h2>Mutation</h2><ul class="build"><li><pre>type Mutation {
-  createEmployment(
-    userId: ID!,
-    companyId: ID!,
-    firstName: String!,
-    lastName: String!
-  ): Employment!
-}</pre></li></ul></article><article><h2>Input Type</h2><ul class="build"><li><pre>input EmploymentInput {
-  firstName: String!
-  lastName: String!
-}</pre></li></ul></article><article><h2>Mutation</h2><ul class="build"><li><pre>type Mutation {
-  createEmployment(
-    userId: ID!,
-    companyId: ID!,
-    fields: EmploymentFields!,
-  ): Employment!
-}</pre></li></ul></article><article><h1>Client</h1></article><article><h1>Call Queries</h1></article><article><h2>Basic</h2><pre>{
-  employment(id: 1) {
-    firstName
-  }
-}</pre></article><article><h2>Result</h2><pre>{
-  "employment": {
-    "firstName": "Tamino"
-  }
-}</pre></article><article><h2>Named</h2><pre>query FetchEmployment {
-  employment(id: 1) {
-    firstName
-  }
-}</pre></article><article><h2>With Parameters</h2><pre>query FetchEmployment($id: Int!) {
-  employment(id: $id) {
-    firstName
-  }
-}</pre></article><article><h2>Query Call</h2><pre>gql`
-  query FetchEmployment($id: Int!) {
-    employment(id: $id) {
-      firstName
-    }
-  }
-`, {
-  id: 1,
-}</pre></article><article><h2>Call Mutations</h2><ul class="build"><li><pre>mutation CreateEmployment(
-  $userId: Int!,
-  $companyId: Int!,
-  $firstName: String!,
-) {
-  createEmployment(userId: $userId, ...) {
-    id
-  }
-}</pre></li></ul></article><article><ul class="horizontal build"><li><h1><a href="https://launchpad.graphql.com/10vn1745k9">Demo</a></h1></li><li><img src="assets/memes/like-a-boss.jpg"></li></ul></article><article><h1><a href="http://graphql.org/code/">Libraries</a></h1></article><article class="section"><h1>Apollo</h1></article><article><h2>What is Apollo?</h2><ul class="build"><li>GraphQL with benefits</li><li>A couple of packages</li></ul></article><article><ul class="build horizontal"><li><h2>Server</h2><img src="assets/images/apollo-server.svg" style="height: 30vh"><ul class="build"><li>Lambda</li><li>EC2</li><li>Express</li></ul></li><li><h2>Engine</h2><img src="assets/images/apollo-engine.svg" style="height: 30vh"><ul class="build"><li>Tracking</li><li>Monitoring</li><li>Caching</li></ul></li><li><h2>Client</h2><img src="assets/images/apollo-client.svg" style="height: 30vh"><ul class="build"><li>Transfer</li><li>Binding</li><li>Reactivity</li></ul></li></ul></article><article><h1>Reactivity?</h1></article><article data-src="assets/images/gql-model.svg" class="image"></article><article data-src="assets/images/gql-events.svg" class="image"></article><article data-src="assets/images/gql-subscriptions.svg" class="image"></article><article><video src="assets/videos/communication.mov" loop controls></video></article><article data-src="assets/images/apollo-trace.png" class="image"></article><article data-src="assets/images/apollo-caching-trace.png" class="image"></article><article data-src="assets/images/apollo-errors.png" class="image"></article><article data-src="assets/images/apollo-schema.png" class="image"></article><article data-src="assets/images/apollo-trends.png" class="image"></article><article><ul class="horizontal build"><li><h1><a href="https://engine.apollographql.com/service/launchpad-10vn1745k9">Demo</a></h1></li><li><img src="assets/memes/like-a-boss.jpg"></li></ul></article><article data-src="assets/memes/all-the-things.jpg" class="image"><h1>&nbsp;</h1><h1>Thats it</h1></article><article><h2>Whats next?</h2><ul class="build"><li><a href="https://www.apollographql.com/">Apollo</a></li><li><a href="http://graphql.org/">GraphQL</a></li><li><a href="http://launchpad.graphql.com">Playground</a></li><li><a href="https://tamino-martinius.github.io/lets-talk-about---graphql">Slides</a></li></ul></article><article class="section"><h1>Questions?</h1></article></section><script src="assets/scripts/main.js"></script></body></html>
+<!DOCTYPE html><html><head><title>Lets talk about ... GraphQL by Nick</title><meta charset="utf-8"><script src="assets/vendor/slides.js"></script><link href="styles.css" rel="stylesheet" type="text/css"><link href="flex.css" rel="stylesheet" type="text/css"></head><body><section class="slides layout-regular template-default"><article><h2>Lets Talk about...</h2><h1>&nbsp;</h1></article><article><h2>Lets Talk about...</h2><h1>Flexbox</h1></article><article><h1>What is Flexbox?</h1></article><article><h2>What is Flexbox?</h2><ul class="build"><li>The Flexbox Layout (Flexible Box) module (CR stage on W3C)</li><li>Set of rules for container and items positioning</li><li>One direction</li><li>Made small-scale layouts or seperate components layout</li></ul></article><article data-src="assets/memes/layouts.jpg" class="image"></article><article><h2>Why do we need another layout tool?</h2><ul class="build"><li>Better grids</li><li>Vertical centering</li><li>Less css code</li><li>No hacks (negative margins, transforms, etc...)</li></ul></article><article data-src="assets/images/flexbox.png" class="image"><h2>What is flexbox</h2><ul style="text-align:left" class="build"><li>main axis -primary axis for layout</li><li>main-start | main-end </li><li>main size - width or height of parent</li><li>cross axis</li><li>cross-start | cross-end - items fill container starting with cross-start towards cross-end</li><li>cross size - height or width of parent</li></ul></article><article><h1>Properties</h1></article><article><h2>Container properties</h2><h2>Display: flex</h2></article><article><h2>Container properties</h2><h2>flex-direction</h2><ul><li>row</li><li>column </li><li>row-reverse</li><li>column-reverse</li></ul></article><article><h2>Container properties</h2><h2>flex-wrap</h2><ul><li>nowrap</li><li>wrap </li><li>wrap-reverse</li></ul></article><article><h2>Container properties</h2><h2>flex-flow</h2><pre class="h0">flex-flow: <‘flex-direction’> || <‘flex-wrap’></pre></article><article><h2>Container properties</h2><h2>justify-content</h2><ul><li>flex-start</li><li>flex-end </li><li>center</li><li>space-between</li><li>space-around</li><li>space-evenly</li></ul></article><article><h2>Container properties</h2><h2>align-items</h2><ul><li>flex-start</li><li>flex-end </li><li>center</li><li>stretch</li><li>baseline</li></ul></article><article><h2>Container properties</h2><h2>align-content</h2><ul><li>flex-start</li><li>flex-end </li><li>center</li><li>stretch</li><li>space-between</li><li>space-around</li></ul></article><article><h2>Child properties</h2><h2>Order</h2><ul><li>By default, flex items are laid out in the source order. </li><li>However, the order property controls the <em>order</em> in which they appear in the flex container.</li></ul></article><article><h2>Child properties</h2><h2>flex-grow</h2><ul><li>This defines the ability for a flex item to grow if necessary.</li></ul></article><article><h2>Child properties</h2><h2>flex-shrink</h2><ul><li>This defines the ability for a flex item to shrink if necessary. </li></ul></article><article><h2>Child properties<h2>flex-basis</h2><ul><li>This defines the default size of an element before the remaining space is distributed. </li></ul></h2></article><article data-src="assets/memes/flex-grow.jpg" class="image"></article><article><h2>Child properties</h2><h2>flex</h2><ul><li>Shorthand property for flex-grow, flex-shrink and flex-basis</li><li>Sets the values <em>intelligently</em></li></ul></article><article data-src="assets/images/flex-basis.svg" class="image"></article><article><h2>Child properties</h2><h2>align-self</h2><ul><li>flex-start</li><li>flex-end </li><li>center</li><li>stretch</li><li>baseline</li></ul></article><article><h1>What can you do with all that?</h1></article><article><h2>smart grids</h2></article><article><h3>5 columns</h3><div class="flex-container"><div class="flex-item"> <div class="num">10</div><div class="txt">Some value</div></div><div class="flex-item"> <div class="num">110</div><div class="txt">Some value</div></div><div class="flex-item"><div class="num">210</div><div class="txt">And one more value</div></div><div class="flex-item"><div class="num">1110</div><div class="txt">Some other value</div></div><div class="flex-item"><div class="num">1110</div><div class="txt">Some other value</div></div></div><h3>3 columns</h3><div class="flex-container"><div class="flex-item"> <div class="num">10</div><div class="txt">Some value</div></div><div class="flex-item"> <div class="num">110</div><div class="txt">Some value</div></div><div class="flex-item"><div class="num">210</div><div class="txt">And one more value</div></div></div><h3>7(!) columns</h3><div class="flex-container"><div class="flex-item"> <div class="num">10</div><div class="txt">Some value</div></div><div class="flex-item"> <div class="num">110</div><div class="txt">Some value</div></div><div class="flex-item"><div class="num">210</div><div class="txt">And one more value</div></div><div class="flex-item"><div class="num">1110</div><div class="txt">Some other value</div></div><div class="flex-item"><div class="num">1110</div><div class="txt">Some other value</div></div><div class="flex-item"><div class="num">1110</div><div class="txt">Some other value</div></div><div class="flex-item"><div class="num">1110</div><div class="txt">Some other value</div></div></div><h3>same styles/markup</h3><pre class="linenums">.flex-container
+   display:flex
+.flex-item
+   flex: 1
+   display: flex
+   flex-direction: column
+   align-items: center</pre></article><article><h2>canonical layout</h2></article><article><div style="height: 30vh; width: 80vw; margin: auto" class="flex-container"><div class="flex-item flex-item--full-width">header</div><div class="flex-item flex-item--fixed-width">nav</div><div class="flex-item">main</div><div class="flex-item flex-item--fixed-width">sidebar</div><div class="flex-item flex-item--full-width">footer</div></div><pre class="linenums">.flex-container
+   display:flex
+   flex-wrap: wrap
+.nav, .sidebar
+  width: 10vh
+.main
+   flex: 1
+   display: flex  
+.header, .footer 
+   width: 100%</pre></article><article><div class="flex-container flex-container--header"><div class="flex-item flex-item--icon"><svg><use href="assets/images/icons/1.svg#Capa_1"></use></svg></div><div class="flex-item flex-item--icon"><svg><use href="assets/images/icons/2.svg#Capa_1"></use></svg></div><div class="flex-item flex-item--icon flex-item--flex-center"><svg><use href="assets/images/icons/3.svg#Capa_1"></use></svg></div><div class="flex-item flex-item--icon flex-item--flex-end"><svg><use href="assets/images/icons/4.svg#Capa_1"></use></svg></div></div><pre class="linenums">.flex-container
+   display:flex
+.icon
+  width: 10vh
+.icon--center
+  margin: auto
+.icon--right
+  margin-left: auto</pre></article><article data-src="assets/memes/magic.jpg" class="image"></article><article><h2>When not to use flexbox</h2></article><article data-src="assets/images/masonry.png" class="image"></article><article data-src="assets/images/table.png" class="image"></article><article data-src="assets/images/grid.png" class="image"></article><article><h2>That's all for today</h2></article><article><h2>Whats next?</h2><ul class="build"><li><a href="https://css-tricks.com/snippets/css/a-guide-to-flexbox/">Good article on css-tricks</a></li><li><a href="https://caniuse.com/#search=flexbox">CanIUse#flexbox</a></li><li><a href="https://healqq.github.io/flex-demo/">Demo page</a></li><li><a href="https://healqq.github.io/lets-talk-about---flexbox">Slides</a></li><li></li><a href="https://css-tricks.com/snippets/css/complete-guide-grid/">Good article about CSS-grid ;)</a></ul></article><article class="section"><h1>Questions?</h1></article></section><script src="assets/scripts/main.js"></script></body></html>

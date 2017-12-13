@@ -24,7 +24,7 @@ gulp.task('slides',function () {
 
 
 gulp.task('styles',function() {
-  gulp.src('./styles.styl')
+  gulp.src('./*.styl')
     .pipe(p.stylus())
     .pipe(p.autoprefixer())
     .pipe(gulp.dest('./'))

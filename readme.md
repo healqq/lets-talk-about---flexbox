@@ -1,3 +1,3 @@
-# Lets talk about - GraphQL by Tamino
+# Lets talk about - Flexbox by Nick
 
-[View Slides](http://tamino-martinius.github.io/lets-talk-about---graphql)
+[View Slides](http://healqq.github.io/lets-talk-about---flexbox)

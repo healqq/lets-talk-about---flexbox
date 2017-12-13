@@ -1,0 +1,71 @@
+.flex-container {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -ms-flex-wrap: wrap;
+      flex-wrap: wrap;
+}
+.flex-container--header {
+  background-image: repeating-linear-gradient(-45deg, #d61313, #d61313 10px, #044211 10px, #044211 20px);
+}
+.flex-item {
+  -webkit-box-flex: 1;
+      -ms-flex: 1;
+          flex: 1;
+  background: #ffa500;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  font-size: 2em;
+}
+.flex-item .num {
+  font-size: 1.5em;
+}
+.flex-item .txt {
+  font-size: 1.2em;
+}
+.flex-item--fixed-width {
+  -webkit-box-flex: initial;
+      -ms-flex: initial;
+          flex: initial;
+  width: 30%;
+  background: #f00;
+}
+.flex-item--full-width {
+  -webkit-box-flex: initial;
+      -ms-flex: initial;
+          flex: initial;
+  width: 100%;
+  background: #008000;
+}
+.flex-item--icon {
+  -webkit-box-flex: initial;
+      -ms-flex: initial;
+          flex: initial;
+  height: 10vh;
+  width: 10vh;
+  stroke: #fff;
+  stroke-width: 4;
+  fill: #fff;
+  background: none;
+  border: 2px dashed #fff;
+}
+.flex-item--icon svg {
+  width: 100%;
+}
+.flex-item--flex-center {
+  margin: auto;
+}
+.flex-item--flex-end {
+  margin-left: auto;
+}
