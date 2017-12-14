@@ -8,8 +8,9 @@ var reload = browserSync.reload;
 gulp.task('browser-sync', function() {
     browserSync({
         open : true,
+        port: 8001,
         server: {
-            baseDir: "./"
+            baseDir: "./",
         }
     });
 });

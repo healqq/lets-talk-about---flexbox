@@ -1,7 +1,7 @@
 doctype html
 html
   head
-      title Lets talk about ... GraphQL by Nick
+      title Lets talk about ... Flexbox by Nick
       meta(charset='utf-8')
       script(src='assets/vendor/slides.js')
       link(href='styles.css'  rel='stylesheet' type='text/css')
@@ -219,13 +219,13 @@ html
             |    width: 100%
         article
           .flex-container.flex-container--header
-            .flex-item.flex-item--icon
+            .flex-item.flex-item--icon.flex-item--icon-1
               svg
                 use(href="assets/images/icons/1.svg#Capa_1")
-            .flex-item.flex-item--icon
+            .flex-item.flex-item--icon.flex-item--icon-2
               svg
                 use(href="assets/images/icons/2.svg#Capa_1")
-            .flex-item.flex-item--icon.flex-item--flex-center
+            .flex-item.flex-item--icon.flex-item--flex-center.flex-item--icon-3
               svg
                 use(href="assets/images/icons/3.svg#Capa_1")
             .flex-item.flex-item--icon.flex-item--flex-end
@@ -234,6 +234,7 @@ html
           pre.linenums
             |.flex-container
             |    display:flex
+            |    align-items: center;
             |.icon
             |   width: 10vh
             |.icon--center

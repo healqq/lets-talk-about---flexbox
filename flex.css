@@ -6,6 +6,10 @@
       flex-wrap: wrap;
 }
 .flex-container--header {
+  height: 12vh;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
   background-image: repeating-linear-gradient(-45deg, #d61313, #d61313 10px, #044211 10px, #044211 20px);
 }
 .flex-item {
@@ -27,6 +31,7 @@
       -ms-flex-pack: center;
           justify-content: center;
   font-size: 2em;
+  text-align: center;
 }
 .flex-item .num {
   font-size: 1.5em;
@@ -59,6 +64,18 @@
   fill: #fff;
   background: none;
   border: 2px dashed #fff;
+}
+.flex-item--icon-1 {
+  height: 8vh;
+  width: 8vh;
+}
+.flex-item--icon-2 {
+  height: 5vh;
+  width: 5vh;
+}
+.flex-item--icon-3 {
+  height: 6vh;
+  width: 6vh;
 }
 .flex-item--icon svg {
   width: 100%;
